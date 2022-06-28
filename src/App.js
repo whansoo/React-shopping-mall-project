@@ -3,6 +3,10 @@ import Orders from "./components/Orders";
 import Prototypes  from "./components/Prototypes";
 import Footer from "./components/Footer";
 import { useState } from "react";
+import React from "react";
+import DetailProductPage from "./components/DetailProductPage/DetailProductPage";
+import { BrowserRouter,Route, Routes } from 'react-router-dom';
+
 
 
 
@@ -42,13 +46,26 @@ const onRemove = (product) => {
 
   return (
     <>
-     <Header countCartItems={cartItems.length} onChange={onChange} query={query} setQuery={setQuery} onAdd={onAdd} onRemove={onRemove}/>
-     <div className="container">
-      <Prototypes onChange={onChange} query={query} setQuery={setQuery} onAdd={onAdd} onRemove={onRemove}/>
+   <BrowserRouter>
+    <Routes>
+    <Route path="/" element={
+      <div className="container">
+      <Header countCartItems={cartItems.length} onChange={onChange} query={query} setQuery={setQuery} onAdd={onAdd} onRemove={onRemove}/>
+      <Prototypes onChange={onChange} query={query} setQuery={setQuery} onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}/>
       <Orders onAdd={onAdd} onRemove={onRemove} query={query} setQuery={setQuery} cartItems={cartItems}/>
       <Footer/>
-     </div>
-    </>
-  );
-}
-export default App;
+     </div>    
+    }>     
+      </Route>
+    <Route path="/Detail/:id" element={<DetailProductPage />}></Route>
+     </Routes>
+     </BrowserRouter>
+     
+    
+     
+     
+     </>
+    
+    );
+  }
+  export default App;
