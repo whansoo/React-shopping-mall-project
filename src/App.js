@@ -6,6 +6,7 @@ import { useState } from "react";
 import React from "react";
 import DetailProductPage from "./components/DetailProductPage/DetailProductPage";
 import { BrowserRouter,Route, Routes } from 'react-router-dom';
+import { Users } from "./components/user";
 
 
 
@@ -13,6 +14,7 @@ import { BrowserRouter,Route, Routes } from 'react-router-dom';
 function App() {
   const [query, setQuery] = useState("");
   const [cartItems, setCartItems] = useState([]);
+  let [items] = useState(Users);
   const onChange = (e) => {
     setQuery(e.target.value.toLowerCase())
 }
@@ -57,7 +59,7 @@ const onRemove = (product) => {
      </div>    
     }>     
       </Route>
-    <Route path="/Detail/:id" element={<DetailProductPage />}></Route>
+    <Route path="/Detail/:id" element={<DetailProductPage  items={items} />}></Route>
      </Routes>
      </BrowserRouter>
      
